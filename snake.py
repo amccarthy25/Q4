@@ -57,6 +57,12 @@ def move():
     if not inside(head) or head in snake:
         square(head.x, head.y, 9, 'red')
         update()
+        
+        # Game over 
+        print("YOU LOSE!")
+        write("YOU lost :(", font=("Verdana",
+                                    15, "normal"), align ="center")
+        
         return
 
     snake.append(head)
