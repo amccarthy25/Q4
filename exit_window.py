@@ -1,9 +1,5 @@
-from turtle import Screen
+from turtle import Screen, Turtle
 from tkinter import *
-
-# CURSOR_SIZE = 20
-# FONT_SIZE = 12
-# FONT = ('Arial', FONT_SIZE, 'bold')
 
 screen = Screen()
 screen.setup(width=600, height=400)
@@ -14,13 +10,10 @@ def do_something():
     Screen().bye()
 
 canvas = screen.getcanvas()
-button = Button(canvas.master, text="Exit", command=do_something)
+button = Button(canvas.master, text="Exit Window", command=do_something, bg='light blue', height=2, width=30, font= ('Helvetica 10 bold italic'))
 
 button.pack()
-button.place(x=300, y=250)  # place the button anywhere on the screen
-
-
-# button.sety(150 + CURSOR_SIZE + FONT_SIZE)
+button.place(x=175, y=200)  # place the button anywhere on the screen
 
 
 screen.exitonclick()
