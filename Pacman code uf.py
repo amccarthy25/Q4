@@ -205,6 +205,7 @@ def valid(point):
 
     if tiles[index] == 0:
         return False
+    
 
     index = offset(point + 19)
 
@@ -231,6 +232,7 @@ def world():
                 path.up()
                 path.goto(x + 10, y + 10)
                 path.dot(2, 'white')
+
 
 
 def move():
@@ -320,8 +322,8 @@ def move():
             
             return
 
-    ontimer(move, 100)
-    # ontimer(move, 75)
+    # ontimer(move, 100)
+    ontimer(move, 75)
 
 def change(x, y):
     """Change pacman aim if valid."""
@@ -360,23 +362,30 @@ def change(x, y):
 
 def reset_game(): 
     # Put everything back in the start state
+    up()
+    goto(pacman.x + 10, pacman.y + 10)
+    dot(20, 'yellow')
+    up()
+    goto(point.x + 10, point.y + 10)
+    dot(20, 'red')
+
+    update()
+    
     pass 
 
 
-def setup_game():
-    print("Setting up game...")
-    setup(420, 420, 370, 0)
-    hideturtle()
-    tracer(False)
-    writer.goto(160, 160)
-    writer.color('white')
-    writer.write(state['score'])
-    listen()
-    onkey(lambda: change(5, 0), 'Right')
-    onkey(lambda: change(-5, 0), 'Left')
-    onkey(lambda: change(0, 5), 'Up')
-    onkey(lambda: change(0, -5), 'Down')
-    world()
-    move()
-    done()
-setup_game()    
+
+setup(420, 420, 370, 0)
+hideturtle()
+tracer(False)
+writer.goto(160, 160)
+writer.color('white')
+writer.write(state['score'])
+listen()
+onkey(lambda: change(5, 0), 'Right')
+onkey(lambda: change(-5, 0), 'Left')
+onkey(lambda: change(0, 5), 'Up')
+onkey(lambda: change(0, -5), 'Down')
+world()
+move()
+done()
