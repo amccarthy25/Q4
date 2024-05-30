@@ -286,6 +286,7 @@ def move():
             # Write on window 
             color('Yellow')
             write("PACMAN", font=("Verdana", 45, "normal"), align="left", move=False)
+          
             #writer.write(state['score'])
             
             #text()
@@ -298,13 +299,18 @@ def move():
                 # play_pacman()
                 # screen.onclick(reset)
                 # mainloop()
-
+                
+                
+            # canvas = screen.getcanvas()
+            # button = Button(canvas.master, text="HI", command=do_something, bg='light blue', height=2, width=10, font= ('Helvetica 10 bold italic'))
+            # button.pack()
+            # button.place(x = ((index % 20) * 20 - 200), y = (180 - (index // 20) * 20))
+            
             
             canvas = screen.getcanvas()
             button = Button(canvas.master, text="Play Again", command=reset_game, bg='light blue', height=2, width=30, font= ('Helvetica 10 bold italic'))
             button.pack()
             button.place(x=85, y=170)
-            
 
             # screen.onclick(reset)
             # mainloop()
@@ -339,7 +345,7 @@ def change(x, y):
 #     square((index % 20) * 20 - 200, 180 - (index // 20) * 20)
 #     def offset(point):
 #         """Return offset of point in tiles."""
-#         x = (floor(point.x, 20) + 200) / 20
+#         x = (floor(point.x, 20) + 200) / 20 
 #         y = (180 - floor(point.y, 20)) / 20
 #         index = int(x + y * 20)
 #         return index    
@@ -361,17 +367,43 @@ def change(x, y):
 #     change(aim.x, aim.y)
 
 def reset_game(): 
-    # Put everything back in the start state
+    writer.undo()
+    writer.write(state['score'])
+
+    clear()
+
+    
+    
+    if valid(pacman + aim):
+        pacman.move(aim)
+
+    index = offset(pacman)
+
+    if tiles[index] == 1:
+        tiles[index] = 2
+        state['score'] += 1
+        x = (index % 20) * 20 - 200
+        y = 180 - (index // 20) * 20
+        square(x, y)
+        
+    reset()
     up()
     goto(pacman.x + 10, pacman.y + 10)
     dot(20, 'yellow')
-    up()
-    goto(point.x + 10, point.y + 10)
-    dot(20, 'red')
+    down()
+    
+    # up()
+    # goto(point.x + 10, point.y + 10)
+    # dot(20, 'red')
+    # down()
 
     update()
     
-    pass 
+    for point, course in ghosts:
+        if abs(pacman - point) < 20:
+
+            screen = Screen()
+    # pass 
 
 
 
@@ -386,6 +418,10 @@ onkey(lambda: change(5, 0), 'Right')
 onkey(lambda: change(-5, 0), 'Left')
 onkey(lambda: change(0, 5), 'Up')
 onkey(lambda: change(0, -5), 'Down')
+world()
+move()
+done()
+
 world()
 move()
 done()
