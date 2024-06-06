@@ -64,25 +64,12 @@ tiles = [
 # fmt: on
 
 
-            # canvas = screen.getcanvas()
-            # button = Button(canvas.master, text="Play Again", command=play, bg='light blue', height=2, width=30, font= ('Helvetica 10 bold italic'))
-            # button.pack()
-            # button.place(x=85, y=170)
-
-            # # screen.onclick(reset)
-            # # mainloop()
-            
-            # canvas = screen.getcanvas()
-            # button = Button(canvas.master, text="Exit Window", command=do_something, bg='light blue', height=2, width=30, font= ('Helvetica 10 bold italic'))
-            # button.pack()
-            # button.place(x=85, y=230)
-            # screen.exitonclick()
 
 def play():
-    global state, path, writer, aim, pacman, ghosts, tiles
+    global state, path, writer, aim, pacman, ghosts, tiles, canvas, play_again
     print("Play again!")
     
-    
+
         
     state = {'score': 0}
     path = Turtle(visible=False)
@@ -119,6 +106,8 @@ def play():
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     ]
     # fmt: on
+ 
+    
     
     setup(420, 420, 370, 0)
     hideturtle()
@@ -134,8 +123,9 @@ def play():
     world()
     move()
     done()
-
     
+    
+
     
 
 def square(x, y):
@@ -241,17 +231,20 @@ def move():
 
     for point, course in ghosts:
         if abs(pacman - point) < 20:
-
-            screen = Screen()
             
             # Write on window 
             color('Yellow')
             write("PACMAN", font=("Verdana", 45, "normal"), align="left", move=False)
           
-            #writer.write(state['score'])
-            
+            #writer.write(state['score'])            
             #text()
-           #screen.setup(width=600, height=400)
+            #screen.setup(width=600, height=400)
+           
+            
+            global canvas, button, do_something, screen
+
+            screen = Screen()
+           
             def do_something():
                 print("Good bye")
                 Screen().bye()
@@ -272,10 +265,6 @@ def move():
             screen.exitonclick()
             
             
-            # screen.onclick(reset_game)
-            # mainloop()
-            # screen.playpacmanonclick()
-            
             return
 
     # ontimer(move, 100)
@@ -289,6 +278,7 @@ def change(x, y):
         
  
     
+
 setup(420, 420, 370, 0)
 hideturtle()
 tracer(False)
@@ -303,4 +293,3 @@ onkey(lambda: change(0, -5), 'Down')
 world()
 move()
 done()
-
